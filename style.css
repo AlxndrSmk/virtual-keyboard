@@ -1,0 +1,18 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Trebuchet MS", "Helvetica", sans-serif;
+}
+
+.title {
+    font-size: 30px;
+    text-align: center;
+    margin: 10px auto;
+    color: rgba(101, 134, 177, 0.8);
+    -webkit-text-stroke: 1px rgba(114, 177, 101, 0.8);
+    -webkit-text-fill-color: rgba(101, 134, 177, 0.8);
+}
