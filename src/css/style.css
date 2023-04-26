@@ -21,3 +21,43 @@ body {
     -webkit-text-stroke: 1px rgba(114, 177, 101, 0.8);
     -webkit-text-fill-color: rgba(101, 134, 177, 0.8);
 }
+
+.textarea {
+    display: block;
+    width: 700px;
+    height: 200px;
+    margin: 10px auto 10px;
+    padding: 10px;
+    font-size: 18px;
+    color: #444444;
+}
+
+.keyboard {
+    width: 700px;
+    margin: 1% auto;
+    padding: 1%;
+    border: 1px solid #b4b4b4;
+    border-radius: 5px;
+}
+
+.keyboard__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.btn {
+    width: 40px;
+    height: 40px;
+    background: #444444;
+    color: #f9f9f9;
+    border-radius: 3px;
+}
+
+.btn:hover {
+    cursor: pointer;
+}
+
+.btn:active {
+    background: #619370;
+}
