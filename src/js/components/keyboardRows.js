@@ -9,6 +9,7 @@ const fragment = document.createDocumentFragment();
 keyboardButtons.forEach((btn) => {
   const keyboardButton = document.createElement('button');
   keyboardButton.classList.add('btn');
+  keyboardButton.classList.add(`btn_size-${btn.size}`);
   keyboardButton.textContent = btn.lang.en;
 
   fragment.appendChild(keyboardButton);

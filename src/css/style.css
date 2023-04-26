@@ -61,3 +61,7 @@ body {
 .btn:active {
     background: #619370;
 }
+
+.btn_size-l {
+    flex-grow: .3;
+}
