@@ -8,9 +8,10 @@ keyboardButtons.forEach((row) => {
 
   row.forEach((btn) => {
     const keyboardButton = document.createElement('button');
+    keyboardButton.textContent = btn.lang.en;
+    keyboardButton.setAttribute('id', btn.name);
     keyboardButton.classList.add('btn');
     keyboardButton.classList.add(`btn_size-${btn.size}`);
-    keyboardButton.textContent = btn.lang.en;
 
     if (btn.name === 'ArrowRight') {
       const arrowWrapper = document.createElement('div');

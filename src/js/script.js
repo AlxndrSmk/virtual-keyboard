@@ -30,6 +30,40 @@ class Keyboard {
     this.keyboard.append(fragment);
     document.body.append(this.description);
     document.body.append(this.language);
+
+    this.addListeners();
+  }
+
+  addListeners() {
+    this.textarea.addEventListener('blur', () => {
+      setTimeout(() => {
+        this.textarea.focus();
+      }, 0);
+
+      this.keyboard.addEventListener('click', (el) => {
+        this.textarea.focus();
+        const keyDownEvent = new Event('keydown', {
+          bubbles: true,
+          cancelable: true,
+          code: el.target.id,
+          view: window,
+        });
+        document.dispatchEvent(keyDownEvent);
+
+        this.textarea.focus();
+        const keyUpEvent = new Event('keyup', {
+          bubbles: true,
+          cancelable: true,
+          code: el.target.id,
+          view: window,
+        });
+        document.dispatchEvent(keyUpEvent);
+      });
+    });
+
+    // document.addEventListener('keydown', (el) => {
+    //   console.log(el.innerText);
+    // });
   }
 }
 
