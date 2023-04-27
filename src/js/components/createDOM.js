@@ -1,4 +1,4 @@
-import keyboardRow from './keyboardRows.js';
+import fragment from './keyboardRows.js';
 
 export default function createDOM() {
   const title = document.createElement('h1');
@@ -15,5 +15,5 @@ export default function createDOM() {
   document.body.append(title);
   document.body.append(textarea);
   document.body.append(keyboard);
-  keyboard.append(keyboardRow);
+  keyboard.append(fragment);
 }

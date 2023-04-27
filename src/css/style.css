@@ -62,6 +62,14 @@ body {
     background: #619370;
 }
 
+.btn_size-s {
+    flex-grow: .1;
+}
+
+.btn_size-m {
+    flex-grow: .2;
+}
+
 .btn_size-l {
     flex-grow: .3;
 }
