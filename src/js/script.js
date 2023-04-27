@@ -61,9 +61,17 @@ class Keyboard {
       });
     });
 
-    // document.addEventListener('keydown', (el) => {
-    //   console.log(el.innerText);
-    // });
+    document.addEventListener('keydown', (el) => {
+      const key = document.getElementById(el.code);
+      console.log(key);
+      key.classList.add('selected');
+    });
+
+    document.addEventListener('keyup', (el) => {
+      const key = document.getElementById(el.code);
+
+      key.classList.remove('selected');
+    });
   }
 }
 

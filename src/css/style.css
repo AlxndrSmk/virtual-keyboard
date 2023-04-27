@@ -55,6 +55,7 @@ body {
   color: #f9f9f9;
   border-radius: 4px;
   margin: auto 1px;
+  transition: all 0.3s;
 }
 
 .btn:hover {
@@ -103,4 +104,9 @@ body {
 .description {
   text-align: center;
   margin: 10px auto;
+}
+
+.selected {
+    border-radius: 10px;
+    background: #6ece8b;
 }

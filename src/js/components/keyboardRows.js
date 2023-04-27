@@ -12,14 +12,13 @@ keyboardButtons.forEach((row) => {
     keyboardButton.setAttribute('id', btn.name);
     keyboardButton.classList.add('btn');
     keyboardButton.classList.add(`btn_size-${btn.size}`);
+    const arrowWrapper = document.createElement('div');
+    arrowWrapper.classList.add('arrow-buttons-wrapper');
 
     if (btn.name === 'ArrowRight') {
-      const arrowWrapper = document.createElement('div');
-      arrowWrapper.classList.add('arrow-buttons-wrapper');
-
       arrowWrapper.innerHTML = `
-      <button class="btn btn_size-xs">▴</button>
-      <button class="btn btn_size-xs">▾</button>
+      <button class="btn btn_size-xs" id="ArrowUp">▴</button>
+      <button class="btn btn_size-xs" id="ArrowDown">▾</button>
       `;
       keyboardRow.appendChild(arrowWrapper);
     }
