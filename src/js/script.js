@@ -63,15 +63,52 @@ class Keyboard {
 
     document.addEventListener('keydown', (el) => {
       const key = document.getElementById(el.code);
-      console.log(key);
       key.classList.add('selected');
+
+      switch (el.code) {
+        case 'Tab':
+          el.preventDefault();
+          this.pasteText('    ');
+          break;
+
+        case 'ArrowLeft':
+          el.preventDefault();
+          this.pasteText('◂');
+          break;
+
+        case 'ArrowRight':
+          el.preventDefault();
+          this.pasteText('▸');
+          break;
+
+        case 'ArrowUp':
+          el.preventDefault();
+          this.pasteText('▴');
+          break;
+
+        case 'ArrowDown':
+          el.preventDefault();
+          this.pasteText('▾');
+          break;
+
+        default:
+      }
     });
 
     document.addEventListener('keyup', (el) => {
       const key = document.getElementById(el.code);
-
       key.classList.remove('selected');
     });
+  }
+
+  pasteText(text) {
+    const cursorLocation = this.textarea.selectionStart;
+    this.textarea.value = this.textarea.value.slice(0, cursorLocation)
+      + text
+      + this.textarea.value.slice(this.textarea.selectionEnd);
+
+    this.textarea.selectionStart = cursorLocation + text.length;
+    this.textarea.selectionEnd = this.textarea.selectionStart;
   }
 }
 
