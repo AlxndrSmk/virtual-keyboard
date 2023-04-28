@@ -1,12 +1,16 @@
 import keyboardButtons from './data.js';
 
 const fragment = document.createDocumentFragment();
+const keysPattern = {};
 
 keyboardButtons.forEach((row) => {
   const keyboardRow = document.createElement('div');
   keyboardRow.classList.add('keyboard__row');
 
   row.forEach((btn) => {
+    keysPattern[btn.name] = btn.lang;
+    keysPattern[btn.name].isFunctional = btn.isFunctional;
+
     const keyboardButton = document.createElement('button');
     keyboardButton.textContent = btn.lang.en;
     keyboardButton.setAttribute('id', btn.name);
@@ -31,4 +35,4 @@ keyboardButtons.forEach((row) => {
   fragment.appendChild(keyboardRow);
 });
 
-export default fragment;
+export { fragment, keysPattern };

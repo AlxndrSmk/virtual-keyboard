@@ -1,4 +1,4 @@
-import fragment from './components/keyboardRows.js';
+import { fragment, keysPattern } from './components/keyboardRows.js';
 
 class Keyboard {
   constructor() {
@@ -62,10 +62,23 @@ class Keyboard {
     });
 
     document.addEventListener('keydown', (el) => {
+      el.stopImmediatePropagation();
+
       const key = document.getElementById(el.code);
       key.classList.add('selected');
 
       switch (el.code) {
+        case 'CapsLock': {
+          this.capsLock = !this.capsLock;
+
+          const option = this.capsLock ? 'add' : 'remove';
+          key.classList[option]('selected');
+          key.classList[option]('selected');
+
+          this.changeLettersKeys(el.upperKey);
+          break;
+        }
+
         case 'Tab':
           el.preventDefault();
           this.pasteText('    ');
@@ -96,8 +109,11 @@ class Keyboard {
     });
 
     document.addEventListener('keyup', (el) => {
+      el.stopImmediatePropagation();
+
       const key = document.getElementById(el.code);
-      key.classList.remove('selected');
+
+      if (el.code !== 'CapsLock') key.classList.remove('selected');
     });
   }
 
@@ -109,6 +125,33 @@ class Keyboard {
 
     this.textarea.selectionStart = cursorLocation + text.length;
     this.textarea.selectionEnd = this.textarea.selectionStart;
+  }
+
+  currentLanguage(language, shift = false) {
+    Array.from(this.keyboard.querySelectorAll('btn')).forEach((el) => {
+      const e = el;
+
+      e.textContent = keysPattern[el.id][language];
+    });
+
+    this.changeLettersKeys(shift);
+  }
+
+  changeLettersKeys(upperKey) {
+    const upperCase = (this.capsLock && !upperKey) || (!this.capsLock && upperKey);
+    const switchCase = upperCase ? 'toUpperCase' : 'toLowerCase';
+
+    Array.from(this.keyboard.querySelectorAll('.btn')).forEach((el) => {
+      const e = el;
+
+      if (!keysPattern[el.id].isFunctional) {
+        if (el.id === 'Backquote' && this.language === 'en') {
+          e.textContent = upperKey ? '~' : '`';
+        } else {
+          e.textContent = el.textContent[switchCase]();
+        }
+      }
+    });
   }
 }
 
