@@ -23,8 +23,7 @@ body {
 }
 
 .textarea {
-    font-family: "Raleway", "Trebuchet MS", "Helvetica", sans-serif;
-
+  font-family: "Raleway", "Trebuchet MS", "Helvetica", sans-serif;
   display: block;
   width: 700px;
   height: 200px;

@@ -1,6 +1,12 @@
 const keyboardButtons = [
   [
     {
+      name: 'Escape',
+      lang: { en: 'esc', ru: 'esc' },
+      isFunctional: true,
+      size: 's',
+    },
+    {
       name: 'Backquote',
       lang: { en: '`', ru: ']' },
       isFunctional: false,
