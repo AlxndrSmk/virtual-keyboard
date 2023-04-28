@@ -24,10 +24,12 @@ class Keyboard {
     this.description.classList.add('description');
     this.language.classList.add('description');
 
+    this.keyboard.append(fragment);
+    this.currentLanguage(this.language);
+
     document.body.append(this.title);
     document.body.append(this.textarea);
     document.body.append(this.keyboard);
-    this.keyboard.append(fragment);
     document.body.append(this.description);
     document.body.append(this.language);
 
@@ -66,6 +68,12 @@ class Keyboard {
 
       const key = document.getElementById(el.code);
       key.classList.add('selected');
+
+      if (el.ctrlKey && el.altKey) {
+        this.language = this.language === 'ru' ? 'en' : 'ru';
+        localStorage.setItem('language', this.language);
+        this.currentLanguage(this.language);
+      }
 
       switch (el.code) {
         case 'CapsLock': {
@@ -127,14 +135,12 @@ class Keyboard {
     this.textarea.selectionEnd = this.textarea.selectionStart;
   }
 
-  currentLanguage(language, shift = false) {
+  currentLanguage(language) {
     Array.from(this.keyboard.querySelectorAll('btn')).forEach((el) => {
       const e = el;
 
-      e.textContent = keysPattern[el.id][language];
+      e.textContent = keysPattern[e.id][language];
     });
-
-    this.changeLettersKeys(shift);
   }
 
   changeLettersKeys(upperKey) {
