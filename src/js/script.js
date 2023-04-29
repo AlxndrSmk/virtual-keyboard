@@ -13,6 +13,8 @@ class Keyboard {
     this.description = document.createElement('p');
     this.language = document.createElement('p');
 
+    this.currentLanguage(this.language);
+
     this.title.innerText = 'RSS Виртуальная клавиатура';
     this.description.innerText = 'Клавиатура создана в операционной системе MacOS';
     this.language.innerText = 'Для переключения языка: левыe ctrl + alt (Windows), левые control + option (MacOS)';
@@ -25,7 +27,6 @@ class Keyboard {
     this.language.classList.add('description');
 
     this.keyboard.append(fragment);
-    this.currentLanguage(this.language);
 
     document.body.append(this.title);
     document.body.append(this.textarea);
@@ -136,7 +137,7 @@ class Keyboard {
   }
 
   currentLanguage(language) {
-    Array.from(this.keyboard.querySelectorAll('btn')).forEach((el) => {
+    Array.from(this.keyboard.querySelectorAll('.btn')).forEach((el) => {
       const e = el;
 
       e.textContent = keysPattern[e.id][language];
