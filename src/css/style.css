@@ -34,6 +34,7 @@ body {
 }
 
 .keyboard {
+  background: #e7e7e7;
   width: 700px;
   margin: 1% auto;
   padding: 1%;

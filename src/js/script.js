@@ -66,6 +66,7 @@ class Keyboard {
 
     document.addEventListener('keydown', (el) => {
       el.stopImmediatePropagation();
+      console.log(el.code);
 
       const key = document.getElementById(el.code);
       key.classList.add('selected');
@@ -73,7 +74,7 @@ class Keyboard {
       if (el.ctrlKey && el.altKey) {
         this.language = this.language === 'ru' ? 'en' : 'ru';
         localStorage.setItem('language', this.language);
-        this.currentLanguage(this.language);
+        this.currentLanguage(this.language, el.shiftKey);
       }
 
       switch (el.code) {
@@ -84,9 +85,19 @@ class Keyboard {
           key.classList[option]('selected');
           key.classList[option]('selected');
 
-          this.changeLettersKeys(el.upperKey);
+          this.changeLettersKeys(el.shiftKey);
           break;
         }
+
+        case 'ShiftLeft':
+          el.preventDefault();
+          this.changeLettersKeys(el.shiftKey);
+          break;
+
+        case 'ShiftRight':
+          el.preventDefault();
+          this.changeLettersKeys(el.shiftKey);
+          break;
 
         case 'Tab':
           el.preventDefault();
@@ -123,6 +134,10 @@ class Keyboard {
       const key = document.getElementById(el.code);
 
       if (el.code !== 'CapsLock') key.classList.remove('selected');
+      if (el.code === 'ShiftLeft' || el.code === 'ShiftRight') {
+        el.preventDefault();
+        this.changeLettersKeys(el.shiftKey);
+      }
     });
   }
 
@@ -144,18 +159,58 @@ class Keyboard {
     });
   }
 
-  changeLettersKeys(upperKey) {
-    const upperCase = (this.capsLock && !upperKey) || (!this.capsLock && upperKey);
+  changeLettersKeys(shiftKey) {
+    const upperCase = (this.capsLock && !shiftKey) || (!this.capsLock && shiftKey);
     const switchCase = upperCase ? 'toUpperCase' : 'toLowerCase';
 
     Array.from(this.keyboard.querySelectorAll('.btn')).forEach((el) => {
       const e = el;
 
-      if (!keysPattern[el.id].isFunctional) {
-        if (el.id === 'Backquote' && this.language === 'en') {
-          e.textContent = upperKey ? '~' : '`';
+      if (!keysPattern[e.id].isFunctional) {
+        if (e.id === 'Backquote' && this.language === 'en') {
+          e.textContent = shiftKey ? '~' : '`';
+        } else if (e.id === 'Backquote' && this.language === 'ru') {
+          e.textContent = shiftKey ? '[' : ']';
+        } else if (e.id === 'Digit1') {
+          e.textContent = shiftKey ? '!' : '1';
+        } else if (e.id === 'Digit2' && this.language === 'en') {
+          e.textContent = shiftKey ? '@' : '2';
+        } else if (e.id === 'Digit2' && this.language === 'ru') {
+          e.textContent = shiftKey ? '"' : '2';
+        } else if (e.id === 'Digit3' && this.language === 'en') {
+          e.textContent = shiftKey ? '#' : '3';
+        } else if (e.id === 'Digit3' && this.language === 'ru') {
+          e.textContent = shiftKey ? '№' : '3';
+        } else if (e.id === 'Digit4' && this.language === 'en') {
+          e.textContent = shiftKey ? '$' : '4';
+        } else if (e.id === 'Digit4' && this.language === 'ru') {
+          e.textContent = shiftKey ? '%' : '4';
+        } else if (e.id === 'Digit5' && this.language === 'en') {
+          e.textContent = shiftKey ? '%' : '5';
+        } else if (e.id === 'Digit5' && this.language === 'ru') {
+          e.textContent = shiftKey ? ':' : '5';
+        } else if (e.id === 'Digit6' && this.language === 'en') {
+          e.textContent = shiftKey ? '^' : '6';
+        } else if (e.id === 'Digit6' && this.language === 'ru') {
+          e.textContent = shiftKey ? ',' : '6';
+        } else if (e.id === 'Digit7' && this.language === 'en') {
+          e.textContent = shiftKey ? '&' : '7';
+        } else if (e.id === 'Digit7' && this.language === 'ru') {
+          e.textContent = shiftKey ? '.' : '7';
+        } else if (e.id === 'Digit8' && this.language === 'en') {
+          e.textContent = shiftKey ? '*' : '8';
+        } else if (e.id === 'Digit8' && this.language === 'ru') {
+          e.textContent = shiftKey ? ';' : '8';
+        } else if (e.id === 'Digit9') {
+          e.textContent = shiftKey ? '(' : '9';
+        } else if (e.id === 'Digit0') {
+          e.textContent = shiftKey ? ')' : '0';
+        } else if (e.id === 'Minus') {
+          e.textContent = shiftKey ? '_' : '-';
+        } else if (e.id === 'Equal') {
+          e.textContent = shiftKey ? '+' : '=';
         } else {
-          e.textContent = el.textContent[switchCase]();
+          e.textContent = e.textContent[switchCase]();
         }
       }
     });
