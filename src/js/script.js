@@ -76,7 +76,6 @@ class Keyboard {
 
     document.addEventListener('keydown', (el) => {
       el.stopImmediatePropagation();
-      console.log(el.code);
 
       const key = document.getElementById(el.code);
       key.classList.add('selected');
@@ -85,6 +84,9 @@ class Keyboard {
         el.preventDefault();
         this.setLang();
         this.currentLanguage(this.lang, el.shiftKey);
+      } else if (!keysPattern[el.code].isFunctional) {
+        el.preventDefault();
+        this.addContent(key.textContent);
       }
 
       switch (el.code) {
@@ -111,27 +113,27 @@ class Keyboard {
 
         case 'Tab':
           el.preventDefault();
-          this.pasteText('    ');
+          this.addContent('    ');
           break;
 
         case 'ArrowLeft':
           el.preventDefault();
-          this.pasteText('◂');
+          this.addContent('◂');
           break;
 
         case 'ArrowRight':
           el.preventDefault();
-          this.pasteText('▸');
+          this.addContent('▸');
           break;
 
         case 'ArrowUp':
           el.preventDefault();
-          this.pasteText('▴');
+          this.addContent('▴');
           break;
 
         case 'ArrowDown':
           el.preventDefault();
-          this.pasteText('▾');
+          this.addContent('▾');
           break;
 
         default:
@@ -151,13 +153,13 @@ class Keyboard {
     });
   }
 
-  pasteText(text) {
+  addContent(symbol) {
     const cursorLocation = this.textarea.selectionStart;
     this.textarea.value = this.textarea.value.slice(0, cursorLocation)
-      + text
+      + symbol
       + this.textarea.value.slice(this.textarea.selectionEnd);
 
-    this.textarea.selectionStart = cursorLocation + text.length;
+    this.textarea.selectionStart = cursorLocation + symbol.length;
     this.textarea.selectionEnd = this.textarea.selectionStart;
   }
 
