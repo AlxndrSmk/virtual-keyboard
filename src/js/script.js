@@ -6,27 +6,37 @@ class Keyboard {
     this.lang = localStorage.getItem('lang') === 'ru' ? 'ru' : 'en';
   }
 
+  setLang() {
+    this.lang = this.lang === 'ru' ? 'en' : 'ru';
+    localStorage.setItem('lang', this.lang);
+  }
+
+  getLang() {
+    return localStorage.getItem('lang', this.lang || 'en');
+  }
+
   init() {
     this.title = document.createElement('h1');
-    this.textarea = document.createElement('textarea');
-    this.keyboard = document.createElement('div');
-    this.description = document.createElement('p');
-    this.langParagraph = document.createElement('p');
-
-    this.currentLanguage(this.lang);
-
+    this.title.classList.add('title');
     this.title.innerText = 'RSS Виртуальная клавиатура';
+
+    this.textarea = document.createElement('textarea');
+    this.textarea.classList.add('textarea');
+    this.textarea.autofocus = true;
+
+    this.keyboard = document.createElement('div');
+    this.keyboard.classList.add('keyboard');
+
+    this.description = document.createElement('p');
+    this.description.classList.add('description');
     this.description.innerText = 'Клавиатура создана в операционной системе MacOS';
+
+    this.langParagraph = document.createElement('p');
+    this.langParagraph.classList.add('description');
     this.langParagraph.innerText = 'Для переключения языка: левыe ctrl + alt (Windows), левые control + option (MacOS)';
 
-    this.textarea.autofocus = true;
-    this.title.classList.add('title');
-    this.textarea.classList.add('textarea');
-    this.keyboard.classList.add('keyboard');
-    this.description.classList.add('description');
-    this.langParagraph.classList.add('description');
-
     this.keyboard.append(fragment);
+    this.currentLanguage(this.lang);
 
     document.body.append(this.title);
     document.body.append(this.textarea);
@@ -73,8 +83,7 @@ class Keyboard {
 
       if (el.ctrlKey && el.altKey) {
         el.preventDefault();
-        this.lang = this.lang === 'ru' ? 'en' : 'ru';
-        localStorage.setItem('lang', this.lang);
+        this.setLang();
         this.currentLanguage(this.lang, el.shiftKey);
       }
 
@@ -152,12 +161,14 @@ class Keyboard {
     this.textarea.selectionEnd = this.textarea.selectionStart;
   }
 
-  currentLanguage(lang) {
+  currentLanguage(lang, shiftKey = false) {
     Array.from(this.keyboard.querySelectorAll('.btn')).forEach((el) => {
       const e = el;
 
       e.textContent = keysPattern[e.id][lang];
     });
+
+    this.changeLettersKeys(shiftKey);
   }
 
   changeLettersKeys(shiftKey) {
@@ -236,5 +247,6 @@ class Keyboard {
 
 window.addEventListener('DOMContentLoaded', () => {
   const keyboard = new Keyboard();
+  keyboard.getLang();
   keyboard.init();
 });
