@@ -3,7 +3,7 @@ import { fragment, keysPattern } from './components/keyboardRows.js';
 class Keyboard {
   constructor() {
     this.capsLock = false;
-    this.language = localStorage.getItem('lang') === 'ru' ? 'ru' : 'en';
+    this.lang = localStorage.getItem('lang') === 'ru' ? 'ru' : 'en';
   }
 
   init() {
@@ -11,20 +11,20 @@ class Keyboard {
     this.textarea = document.createElement('textarea');
     this.keyboard = document.createElement('div');
     this.description = document.createElement('p');
-    this.language = document.createElement('p');
+    this.langParagraph = document.createElement('p');
 
-    this.currentLanguage(this.language);
+    this.currentLanguage(this.lang);
 
     this.title.innerText = 'RSS Виртуальная клавиатура';
     this.description.innerText = 'Клавиатура создана в операционной системе MacOS';
-    this.language.innerText = 'Для переключения языка: левыe ctrl + alt (Windows), левые control + option (MacOS)';
+    this.langParagraph.innerText = 'Для переключения языка: левыe ctrl + alt (Windows), левые control + option (MacOS)';
 
     this.textarea.autofocus = true;
     this.title.classList.add('title');
     this.textarea.classList.add('textarea');
     this.keyboard.classList.add('keyboard');
     this.description.classList.add('description');
-    this.language.classList.add('description');
+    this.langParagraph.classList.add('description');
 
     this.keyboard.append(fragment);
 
@@ -32,7 +32,7 @@ class Keyboard {
     document.body.append(this.textarea);
     document.body.append(this.keyboard);
     document.body.append(this.description);
-    document.body.append(this.language);
+    document.body.append(this.langParagraph);
 
     this.addListeners();
   }
@@ -72,9 +72,10 @@ class Keyboard {
       key.classList.add('selected');
 
       if (el.ctrlKey && el.altKey) {
-        this.language = this.language === 'ru' ? 'en' : 'ru';
-        localStorage.setItem('language', this.language);
-        this.currentLanguage(this.language, el.shiftKey);
+        el.preventDefault();
+        this.lang = this.lang === 'ru' ? 'en' : 'ru';
+        localStorage.setItem('lang', this.lang);
+        this.currentLanguage(this.lang, el.shiftKey);
       }
 
       switch (el.code) {
@@ -151,11 +152,11 @@ class Keyboard {
     this.textarea.selectionEnd = this.textarea.selectionStart;
   }
 
-  currentLanguage(language) {
+  currentLanguage(lang) {
     Array.from(this.keyboard.querySelectorAll('.btn')).forEach((el) => {
       const e = el;
 
-      e.textContent = keysPattern[e.id][language];
+      e.textContent = keysPattern[e.id][lang];
     });
   }
 
@@ -167,39 +168,39 @@ class Keyboard {
       const e = el;
 
       if (!keysPattern[e.id].isFunctional) {
-        if (e.id === 'Backquote' && this.language === 'en') {
+        if (e.id === 'Backquote' && this.lang === 'en') {
           e.textContent = shiftKey ? '~' : '`';
-        } else if (e.id === 'Backquote' && this.language === 'ru') {
+        } else if (e.id === 'Backquote' && this.lang === 'ru') {
           e.textContent = shiftKey ? '[' : ']';
         } else if (e.id === 'Digit1') {
           e.textContent = shiftKey ? '!' : '1';
-        } else if (e.id === 'Digit2' && this.language === 'en') {
+        } else if (e.id === 'Digit2' && this.lang === 'en') {
           e.textContent = shiftKey ? '@' : '2';
-        } else if (e.id === 'Digit2' && this.language === 'ru') {
+        } else if (e.id === 'Digit2' && this.lang === 'ru') {
           e.textContent = shiftKey ? '"' : '2';
-        } else if (e.id === 'Digit3' && this.language === 'en') {
+        } else if (e.id === 'Digit3' && this.lang === 'en') {
           e.textContent = shiftKey ? '#' : '3';
-        } else if (e.id === 'Digit3' && this.language === 'ru') {
+        } else if (e.id === 'Digit3' && this.lang === 'ru') {
           e.textContent = shiftKey ? '№' : '3';
-        } else if (e.id === 'Digit4' && this.language === 'en') {
+        } else if (e.id === 'Digit4' && this.lang === 'en') {
           e.textContent = shiftKey ? '$' : '4';
-        } else if (e.id === 'Digit4' && this.language === 'ru') {
+        } else if (e.id === 'Digit4' && this.lang === 'ru') {
           e.textContent = shiftKey ? '%' : '4';
-        } else if (e.id === 'Digit5' && this.language === 'en') {
+        } else if (e.id === 'Digit5' && this.lang === 'en') {
           e.textContent = shiftKey ? '%' : '5';
-        } else if (e.id === 'Digit5' && this.language === 'ru') {
+        } else if (e.id === 'Digit5' && this.lang === 'ru') {
           e.textContent = shiftKey ? ':' : '5';
-        } else if (e.id === 'Digit6' && this.language === 'en') {
+        } else if (e.id === 'Digit6' && this.lang === 'en') {
           e.textContent = shiftKey ? '^' : '6';
-        } else if (e.id === 'Digit6' && this.language === 'ru') {
+        } else if (e.id === 'Digit6' && this.lang === 'ru') {
           e.textContent = shiftKey ? ',' : '6';
-        } else if (e.id === 'Digit7' && this.language === 'en') {
+        } else if (e.id === 'Digit7' && this.lang === 'en') {
           e.textContent = shiftKey ? '&' : '7';
-        } else if (e.id === 'Digit7' && this.language === 'ru') {
+        } else if (e.id === 'Digit7' && this.lang === 'ru') {
           e.textContent = shiftKey ? '.' : '7';
-        } else if (e.id === 'Digit8' && this.language === 'en') {
+        } else if (e.id === 'Digit8' && this.lang === 'en') {
           e.textContent = shiftKey ? '*' : '8';
-        } else if (e.id === 'Digit8' && this.language === 'ru') {
+        } else if (e.id === 'Digit8' && this.lang === 'ru') {
           e.textContent = shiftKey ? ';' : '8';
         } else if (e.id === 'Digit9') {
           e.textContent = shiftKey ? '(' : '9';
@@ -209,6 +210,22 @@ class Keyboard {
           e.textContent = shiftKey ? '_' : '-';
         } else if (e.id === 'Equal') {
           e.textContent = shiftKey ? '+' : '=';
+        } else if (e.id === 'BracketLeft' && this.lang === 'en') {
+          e.textContent = shiftKey ? '{' : '[';
+        } else if (e.id === 'BracketRight' && this.lang === 'en') {
+          e.textContent = shiftKey ? '}' : ']';
+        } else if (e.id === 'Backslash' && this.lang === 'en') {
+          e.textContent = shiftKey ? '|' : '\\';
+        } else if (e.id === 'Semicolon' && this.lang === 'en') {
+          e.textContent = shiftKey ? ':' : ';';
+        } else if (e.id === 'Quote' && this.lang === 'en') {
+          e.textContent = shiftKey ? '"' : "'";
+        } else if (e.id === 'Comma' && this.lang === 'en') {
+          e.textContent = shiftKey ? '<' : ',';
+        } else if (e.id === 'Period' && this.lang === 'en') {
+          e.textContent = shiftKey ? '>' : '.';
+        } else if (e.id === 'Slash') {
+          e.textContent = shiftKey ? '?' : '/';
         } else {
           e.textContent = e.textContent[switchCase]();
         }

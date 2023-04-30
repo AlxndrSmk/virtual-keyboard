@@ -75,27 +75,24 @@ body {
 }
 
 .btn_size-s {
-  flex-grow: .1;
+  flex-grow: .39;
 }
 
 .btn_size-m {
-  flex-grow: .2;
+  flex-grow: .6;
 }
 
 .btn_size-l {
-  flex-grow: .12;
-}
-
-.btn_size-xl {
-  flex-grow: .06;
-}
-
-.btn_size-xxl {
-  flex-grow: .9;
+  flex-grow: .8;
 }
 
 .btn_size-xxxl {
-  flex-grow: 4;
+  flex-grow: 19;
+}
+
+.btn_size-fix {
+    width: 40px;
+    height: 40px;
 }
 
 .arrow-buttons-wrapper {
