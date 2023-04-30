@@ -254,7 +254,7 @@ const keyboardButtons = [
       name: 'Enter',
       lang: { en: 'return', ru: 'return' },
       isFunctional: true,
-      size: 's',
+      size: 'm',
     },
   ],
   [
