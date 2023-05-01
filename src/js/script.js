@@ -138,33 +138,27 @@ class Keyboard {
   }
 
   clickBackspace() {
-    let start = this.textarea.selectionStart;
-    let end = this.textarea.selectionEnd;
-
-    if (start !== end) {
+    if (this.textarea.selectionStart !== this.textarea.selectionEnd) {
       this.addContent('');
     } else {
-      const cursorLocation = Math.max(0, start - 1);
+      const cursorLocation = Math.max(0, this.textarea.selectionStart - 1);
 
       this.textarea.value = this.textarea.value.slice(0, cursorLocation)
-        + this.textarea.value.slice(end);
+        + this.textarea.value.slice(this.textarea.selectionEnd);
 
-      start = cursorLocation;
-      end = start;
+      this.textarea.selectionStart = cursorLocation;
+      this.textarea.selectionEnd = this.textarea.selectionStart;
     }
   }
 
   addContent(symbol) {
-    let start = this.textarea.selectionStart;
-    let end = this.textarea.selectionEnd;
-
-    const cursorLocation = start;
+    const cursorLocation = this.textarea.selectionStart;
     this.textarea.value = this.textarea.value.slice(0, cursorLocation)
       + symbol
-      + this.textarea.value.slice(end);
+      + this.textarea.value.slice(this.textarea.selectionEnd);
 
-    start = cursorLocation + symbol.length;
-    end = start;
+    this.textarea.selectionStart = cursorLocation + symbol.length;
+    this.textarea.selectionEnd = this.textarea.selectionStart;
   }
 
   currentLanguage(lang, shiftKey = false) {
