@@ -117,6 +117,9 @@ class Keyboard {
           } else if (el.code === 'Backspace') {
             el.preventDefault();
             this.clickBackspace();
+          } else if (el.code === 'Enter') {
+            el.preventDefault();
+            this.addContent('\n');
           }
       }
     });
