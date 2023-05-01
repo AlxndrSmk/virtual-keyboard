@@ -48,91 +48,91 @@ class Keyboard {
   }
 
   addListeners() {
-    this.keyboard.addEventListener('click', (el) => {
+    this.keyboard.addEventListener('click', (event) => {
       this.textarea.focus();
       const keyDownEvent = new KeyboardEvent('keydown', {
-        code: el.target.id,
+        code: event.target.id,
       });
       document.dispatchEvent(keyDownEvent);
 
       this.textarea.focus();
       const keyUpEvent = new KeyboardEvent('keyup', {
-        code: el.target.id,
+        code: event.target.id,
       });
       document.dispatchEvent(keyUpEvent);
     });
 
-    document.addEventListener('keydown', (el) => {
-      el.stopImmediatePropagation();
+    document.addEventListener('keydown', (event) => {
+      event.stopImmediatePropagation();
       this.textarea.focus();
 
-      const key = document.getElementById(el.code);
+      const key = document.getElementById(event.code);
 
       if (!key) {
-        el.preventDefault();
+        event.preventDefault();
         return;
       }
 
-      switch (el.code) {
+      switch (event.code) {
         case 'CapsLock': {
-          el.preventDefault();
+          event.preventDefault();
           this.capsLock = !this.capsLock;
 
           const option = this.capsLock ? 'add' : 'remove';
           key.classList[option]('selected');
           key.classList[option]('selected');
 
-          this.changeLettersKeys(el.shiftKey);
+          this.changeLettersKeys(event.shiftKey);
           break;
         }
 
         default:
           key.classList.add('selected');
 
-          if (el.ctrlKey && el.altKey) {
-            el.preventDefault();
+          if (event.ctrlKey && event.altKey) {
+            event.preventDefault();
             this.setLang();
-            this.currentLanguage(this.lang, el.shiftKey);
-          } else if (!keysPattern[el.code].isFunctional) {
-            el.preventDefault();
+            this.currentLanguage(this.lang, event.shiftKey);
+          } else if (!keysPattern[event.code].isFunctional) {
+            event.preventDefault();
             this.addContent(key.textContent);
-          } else if (el.key === 'Shift') {
-            el.preventDefault();
-            this.changeLettersKeys(el.shiftKey);
-          } else if (el.code === 'Tab') {
-            el.preventDefault();
+          } else if (event.key === 'Shift') {
+            event.preventDefault();
+            this.changeLettersKeys(event.shiftKey);
+          } else if (event.code === 'Tab') {
+            event.preventDefault();
             this.addContent('    ');
-          } else if (el.code === 'ArrowLeft') {
-            el.preventDefault();
+          } else if (event.code === 'ArrowLeft') {
+            event.preventDefault();
             this.addContent('◂');
-          } else if (el.code === 'ArrowRight') {
-            el.preventDefault();
+          } else if (event.code === 'ArrowRight') {
+            event.preventDefault();
             this.addContent('▸');
-          } else if (el.code === 'ArrowUp') {
-            el.preventDefault();
+          } else if (event.code === 'ArrowUp') {
+            event.preventDefault();
             this.addContent('▴');
-          } else if (el.code === 'ArrowDown') {
-            el.preventDefault();
+          } else if (event.code === 'ArrowDown') {
+            event.preventDefault();
             this.addContent('▾');
-          } else if (el.code === 'Backspace') {
-            el.preventDefault();
+          } else if (event.code === 'Backspace') {
+            event.preventDefault();
             this.clickBackspace();
-          } else if (el.code === 'Enter') {
-            el.preventDefault();
+          } else if (event.code === 'Enter') {
+            event.preventDefault();
             this.addContent('\n');
           }
       }
     });
 
-    document.addEventListener('keyup', (el) => {
-      el.stopImmediatePropagation();
+    document.addEventListener('keyup', (event) => {
+      event.stopImmediatePropagation();
 
-      const key = document.getElementById(el.code);
+      const key = document.getElementById(event.code);
 
-      if (el.code !== 'CapsLock') key.classList.remove('selected');
-      if (el.key === 'Shift') {
-        el.preventDefault();
-        this.changeLettersKeys(el.shiftKey);
+      if (event.code !== 'CapsLock') key.classList.remove('selected');
+      if (event.key === 'Shift') {
+        event.preventDefault();
+        this.changeLettersKeys(event.shiftKey);
       }
     });
   }
