@@ -55,18 +55,25 @@ body {
   height: 40px;
   background: #444444;
   color: #f9f9f9;
+  border: 1px solid #9d9d9d;
   border-radius: 4px;
   margin: auto 1px;
   transition: all 0.3s;
+  box-shadow: rgba(0, 0, 0, .5) 0 0 4px ;
+  outline: none;
 }
 
 .btn:hover {
   cursor: pointer;
-  background: #619370;
+  background: rgba(48, 48, 48, 0.2);
+  box-shadow: none;
 }
 
-.btn:active {
-  background: #6ece8b;
+.btn:active, 
+.selected {
+  background: #9d9d9d;
+  border-radius: 13px;
+  box-shadow: none;
 }
 
 .btn_size-xs {
@@ -103,9 +110,4 @@ body {
 .description {
   text-align: center;
   margin: 10px auto;
-}
-
-.selected {
-    border-radius: 10px;
-    background: #6ece8b;
 }
