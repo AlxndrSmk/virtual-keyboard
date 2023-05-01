@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Raleway", "Trebuchet MS", "Helvetica", sans-serif;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.title {
+  font-size: 30px;
+  text-align: center;
+  margin: 10px auto;
+  color: #424242;
+}
+
+.textarea {
+  font-family: "Raleway", "Trebuchet MS", "Helvetica", sans-serif;
+  display: block;
+  width: 700px;
+  height: 200px;
+  margin: 10px auto 10px;
+  padding: 10px;
+  font-size: 18px;
+  color: #444444;
+  outline: none;
+}
+
+.keyboard {
+  background: #e7e7e7;
+  width: 700px;
+  margin: 1% auto;
+  padding: 1%;
+  border: 1px solid #b4b4b4;
+  border-radius: 5px;
+}
+
+.keyboard__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.btn {
+  font-family: "Raleway", "Trebuchet MS", "Helvetica", sans-serif;
+  min-width: 40px;
+  height: 40px;
+  background: #444444;
+  color: #f9f9f9;
+  border: 1px solid #9d9d9d;
+  border-radius: 4px;
+  margin: auto 1px;
+  transition: all 0.3s;
+  outline: none;
+
+  box-shadow: 
+    0px 0px rgba(128,128,128,1), 
+    0px 3px rgba(118,118,118,1),
+    0px 0px rgba(108,108,108,1),
+    0px 0px rgba(98,98,98,1),
+    0px 2px rgba(88,88,88,1),
+    0px 1px rgba(78,78,78,1),
+    0px 1px 6px -18px rgba(128, 128, 128, 1);
+}
+
+.btn:hover {
+  cursor: pointer;
+  background: #808080;
+}
+
+.btn:active, 
+.selected {
+  background: #9d9d9d;
+  box-shadow: none;
+  transform: translate(0, 3px);
+  border: 1px solid #9d9d9d;
+}
+
+.btn_size-xs {
+  flex-grow: .1;
+  height: 20px;
+}
+.btn_size-xs:nth-child(2) {
+  z-index: 1;
+}
+
+.btn_size-s {
+  flex-grow: .39;
+}
+
+.btn_size-m {
+  flex-grow: .6;
+}
+
+.btn_size-l {
+  flex-grow: .8;
+}
+
+.btn_size-xxxl {
+  flex-grow: 19;
+}
+
+.btn_size-fix {
+    width: 40px;
+    height: 40px;
+}
+
+.arrow-buttons-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.description {
+  text-align: center;
+  margin: 10px auto;
+  color: #424242;
+}
