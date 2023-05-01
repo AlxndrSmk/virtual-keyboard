@@ -48,6 +48,18 @@ class Keyboard {
   }
 
   addListeners() {
+    this.keyboard.addEventListener('mousedown', (event) => {
+      if (event.target.id === 'ShiftLeft' || event.target.id === 'ShiftRight') {
+        this.changeLettersKeys(!event.shiftKey);
+      }
+    });
+
+    this.keyboard.addEventListener('mouseup', (event) => {
+      if (event.target.id === 'ShiftLeft' || event.target.id === 'ShiftRight') {
+        this.changeLettersKeys(event.shiftKey);
+      }
+    });
+
     this.keyboard.addEventListener('click', (event) => {
       this.textarea.focus();
       const keyDownEvent = new KeyboardEvent('keydown', {
