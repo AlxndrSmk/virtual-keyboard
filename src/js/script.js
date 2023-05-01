@@ -1,9 +1,11 @@
 import { fragment, keysPattern } from './components/keyboardRows.js';
+import icon from './components/icon.js';
 
 class Keyboard {
   constructor() {
     this.capsLock = false;
     this.lang = localStorage.getItem('lang') === 'ru' ? 'ru' : 'en';
+    document.title = 'Virtual Keyboard || Alexander Samak';
   }
 
   setLang() {
@@ -33,10 +35,12 @@ class Keyboard {
 
     this.langParagraph = document.createElement('p');
     this.langParagraph.classList.add('description');
-    this.langParagraph.innerText = 'Для переключения языка: левыe ctrl + alt (Windows), левые control + option (MacOS)';
+    this.langParagraph.innerText = 'Для переключения языка: левыe ctrl + alt (Win), левые control + option (Mac)';
 
     this.keyboard.append(fragment);
     this.currentLanguage(this.lang);
+
+    document.head.append(icon);
 
     document.body.append(this.title);
     document.body.append(this.textarea);
@@ -141,7 +145,7 @@ class Keyboard {
 
       const key = document.getElementById(event.code);
 
-      if (event.code !== 'CapsLock') key.classList.remove('selected');
+      if (event.code !== 'CapsLock' && event.code !== 'F12') key.classList.remove('selected');
       if (event.key === 'Shift') {
         event.preventDefault();
         this.changeLettersKeys(event.shiftKey);
