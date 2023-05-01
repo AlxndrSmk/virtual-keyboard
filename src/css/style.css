@@ -17,9 +17,7 @@ body {
   font-size: 30px;
   text-align: center;
   margin: 10px auto;
-  color: rgba(101, 134, 177, 0.8);
-  -webkit-text-stroke: 1px rgba(114, 177, 101, 0.8);
-  -webkit-text-fill-color: rgba(101, 134, 177, 0.8);
+  color: #424242;
 }
 
 .textarea {
@@ -31,6 +29,7 @@ body {
   padding: 10px;
   font-size: 18px;
   color: #444444;
+  outline: none;
 }
 
 .keyboard {
@@ -46,7 +45,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 3px;
+  margin-bottom: 5px;
 }
 
 .btn {
@@ -59,26 +58,37 @@ body {
   border-radius: 4px;
   margin: auto 1px;
   transition: all 0.3s;
-  box-shadow: rgba(0, 0, 0, .5) 0 0 4px ;
   outline: none;
+
+  box-shadow: 
+    0px 0px rgba(128,128,128,1), 
+    0px 3px rgba(118,118,118,1),
+    0px 0px rgba(108,108,108,1),
+    0px 0px rgba(98,98,98,1),
+    0px 2px rgba(88,88,88,1),
+    0px 1px rgba(78,78,78,1),
+    0px 1px 6px -18px rgba(128, 128, 128, 1);
 }
 
 .btn:hover {
   cursor: pointer;
-  background: rgba(48, 48, 48, 0.2);
-  box-shadow: none;
+  background: #808080;
 }
 
 .btn:active, 
 .selected {
   background: #9d9d9d;
-  border-radius: 13px;
   box-shadow: none;
+  transform: translate(0, 3px);
+  border: 1px solid #9d9d9d;
 }
 
 .btn_size-xs {
   flex-grow: .1;
   height: 20px;
+}
+.btn_size-xs:nth-child(2) {
+  z-index: 1;
 }
 
 .btn_size-s {
@@ -103,6 +113,7 @@ body {
 }
 
 .arrow-buttons-wrapper {
+  position: relative;
   display: flex;
   flex-direction: column;
 }
@@ -110,4 +121,5 @@ body {
 .description {
   text-align: center;
   margin: 10px auto;
+  color: #424242;
 }
