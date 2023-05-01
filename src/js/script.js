@@ -5,6 +5,7 @@ class Keyboard {
   constructor() {
     this.capsLock = false;
     this.lang = localStorage.getItem('lang') === 'ru' ? 'ru' : 'en';
+    this.interval = null;
   }
 
   setLang() {
@@ -55,10 +56,22 @@ class Keyboard {
     this.keyboard.addEventListener('mousedown', (event) => {
       if (event.target.id === 'ShiftLeft' || event.target.id === 'ShiftRight') {
         this.changeLettersKeys(!event.shiftKey);
+      } else if (event.target.id === 'Backspace') {
+        event.preventDefault();
+        this.clickBackspace();
+        this.interval = setInterval(() => {
+          this.clickBackspace();
+        }, 150);
+      } else if (event.target.id === 'Space') {
+        event.preventDefault();
+        this.interval = setInterval(() => {
+          this.addContent(' ');
+        }, 150);
       }
     });
 
     this.keyboard.addEventListener('mouseup', (event) => {
+      clearInterval(this.interval);
       if (event.target.id === 'ShiftLeft' || event.target.id === 'ShiftRight') {
         this.changeLettersKeys(event.shiftKey);
       }
@@ -130,9 +143,6 @@ class Keyboard {
           } else if (event.code === 'ArrowDown') {
             event.preventDefault();
             this.addContent('▾');
-          } else if (event.code === 'Backspace') {
-            event.preventDefault();
-            this.clickBackspace();
           } else if (event.code === 'Enter') {
             event.preventDefault();
             this.addContent('\n');
