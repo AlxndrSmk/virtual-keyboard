@@ -114,6 +114,9 @@ class Keyboard {
           } else if (el.code === 'ArrowDown') {
             el.preventDefault();
             this.addContent('▾');
+          } else if (el.code === 'Backspace') {
+            el.preventDefault();
+            this.clickBackspace();
           }
       }
     });
@@ -131,14 +134,34 @@ class Keyboard {
     });
   }
 
+  clickBackspace() {
+    let start = this.textarea.selectionStart;
+    let end = this.textarea.selectionEnd;
+
+    if (start !== end) {
+      this.addContent('');
+    } else {
+      const cursorLocation = Math.max(0, start - 1);
+
+      this.textarea.value = this.textarea.value.slice(0, cursorLocation)
+        + this.textarea.value.slice(end);
+
+      start = cursorLocation;
+      end = start;
+    }
+  }
+
   addContent(symbol) {
-    const cursorLocation = this.textarea.selectionStart;
+    let start = this.textarea.selectionStart;
+    let end = this.textarea.selectionEnd;
+
+    const cursorLocation = start;
     this.textarea.value = this.textarea.value.slice(0, cursorLocation)
       + symbol
-      + this.textarea.value.slice(this.textarea.selectionEnd);
+      + this.textarea.value.slice(end);
 
-    this.textarea.selectionStart = cursorLocation + symbol.length;
-    this.textarea.selectionEnd = this.textarea.selectionStart;
+    start = cursorLocation + symbol.length;
+    end = start;
   }
 
   currentLanguage(lang, shiftKey = false) {
