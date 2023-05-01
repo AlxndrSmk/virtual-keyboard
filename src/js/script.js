@@ -5,7 +5,6 @@ class Keyboard {
   constructor() {
     this.capsLock = false;
     this.lang = localStorage.getItem('lang') === 'ru' ? 'ru' : 'en';
-    document.title = 'Virtual Keyboard || Alexander Samak';
   }
 
   setLang() {
@@ -40,6 +39,7 @@ class Keyboard {
     this.keyboard.append(fragment);
     this.currentLanguage(this.lang);
 
+    document.title = 'Virtual Keyboard || Alexander Samak';
     document.head.append(icon);
 
     document.body.append(this.title);
