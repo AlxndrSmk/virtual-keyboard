@@ -54,6 +54,7 @@ class Keyboard {
 
   addListeners() {
     this.keyboard.addEventListener('mousedown', (event) => {
+      if (!event.target) return;
       if (event.target.id === 'ShiftLeft' || event.target.id === 'ShiftRight') {
         this.changeLettersKeys(!event.shiftKey);
       } else if (event.target.id === 'Backspace') {
@@ -92,6 +93,7 @@ class Keyboard {
     });
 
     document.addEventListener('keydown', (event) => {
+      if (!event) return;
       event.stopImmediatePropagation();
       this.textarea.focus();
 
@@ -155,6 +157,7 @@ class Keyboard {
 
       const key = document.getElementById(event.code);
 
+      if (!key) return;
       if (event.code !== 'CapsLock' && event.code !== 'F12') key.classList.remove('selected');
       if (event.key === 'Shift') {
         event.preventDefault();
