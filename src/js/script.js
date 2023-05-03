@@ -1,5 +1,8 @@
 import { fragment, keysPattern } from './components/keyboardRows.js';
 import icon from './components/icon.js';
+import {
+  github, linkedin, rsschool, githubLink, linkedinLink, rsschoolLink,
+} from './components/links.js';
 
 class Keyboard {
   constructor() {
@@ -37,6 +40,9 @@ class Keyboard {
     this.langParagraph.classList.add('description');
     this.langParagraph.innerText = 'Для переключения языка: левыe ctrl + alt (Win), левые control + option (Mac)';
 
+    this.linksWrapper = document.createElement('div');
+    this.linksWrapper.classList.add('links-wrapper');
+
     this.keyboard.append(fragment);
     this.currentLanguage(this.lang);
 
@@ -48,6 +54,16 @@ class Keyboard {
     document.body.append(this.keyboard);
     document.body.append(this.description);
     document.body.append(this.langParagraph);
+
+    document.body.append(this.linksWrapper);
+
+    this.linksWrapper.append(githubLink);
+    this.linksWrapper.append(linkedinLink);
+    this.linksWrapper.append(rsschoolLink);
+
+    githubLink.append(github);
+    linkedinLink.append(linkedin);
+    rsschoolLink.append(rsschool);
 
     this.addListeners();
   }

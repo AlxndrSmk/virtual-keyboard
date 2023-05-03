@@ -125,3 +125,22 @@ body {
   margin: 10px auto;
   color: #424242;
 }
+
+.links-wrapper {
+  margin: 30px auto 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 3%;
+  width: 700px;
+}
+
+.link-logo {
+  cursor: pointer;
+  height: 15px;
+  opacity: .6;
+}
+
+.link-logo:hover {
+  opacity: 1;
+}
